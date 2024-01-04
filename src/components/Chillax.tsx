@@ -1,21 +1,30 @@
-// pages/chillax.js
-import Head from 'next/head';
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// Import your custom CSS here
+import React, { useState } from 'react';
+import { add_new_post } from '@/Services/Admin/post';
 
 const Chillax = () => {
-  // You can manage state and functionality here
+  const [postText, setPostText] = useState('');
 
+  const handlePostSubmit = async () => {
+    // Assuming postText is the content of the post and you need to add a title
+    const postData = {
+        title: "Post Title[Default]", 
+        content: postText, 
+    };
+
+    const post = await add_new_post(postData);
+    
+};
   return (
     <>
-      <Head>
-        <title>Chillax</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Add other head tags here */}
-      </Head>
-      <div className="section" id="vue-target">
+      {/* Your existing code */}
+      <div>
         {/* Your page content goes here */}
+        <input
+          type="text"
+          value={postText}
+          onChange={(e) => setPostText(e.target.value)}
+        />
+        <button onClick={handlePostSubmit}>Submit Post</button>
         
       </div>
     </>
