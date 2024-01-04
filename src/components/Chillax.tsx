@@ -17,6 +17,7 @@ const Chillax = () => {
 
     console.log("GENERATED TEXT");
     console.log(artTitle);
+    console.log("hi"); 
 
     const postData = {
       title: artTitle.output.content, 
