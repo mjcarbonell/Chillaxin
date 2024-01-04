@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
 import { add_new_post } from '@/Services/Admin/post';
+import { handleGenerateText } from '@/Services/Admin/openai';
+// This should be a server-side function
 
 const Chillax = () => {
   const [postText, setPostText] = useState('');
+  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessageRenaissance, setInputMessageRenaissance] = useState('');
+
+  const [output, setOutput] = useState('');
 
   const handlePostSubmit = async () => {
-    // Assuming postText is the content of the post and you need to add a title
+    
+    const inputMessageTitle = "create a renaissance art title based off of " + inputMessage; 
+    const artTitle = await handleGenerateText(inputMessageTitle); 
+
+    console.log("GENERATED TEXT");
+    console.log(artTitle);
+
     const postData = {
-        title: "Post Title[Default]", 
-        content: postText, 
+      title: artTitle.output.content, 
+      content: inputMessage, 
     };
 
     const post = await add_new_post(postData);
-    
 };
   return (
     <>
@@ -25,8 +36,15 @@ const Chillax = () => {
           onChange={(e) => setPostText(e.target.value)}
         />
         <button onClick={handlePostSubmit}>Submit Post</button>
-        
       </div>
+
+      <div>
+        <textarea
+          value={inputMessage}
+          onChange={(e) => setInputMessage(e.target.value)}
+        />
+      </div>
+
     </>
   );
 };

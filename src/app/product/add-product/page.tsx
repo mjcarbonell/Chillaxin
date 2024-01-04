@@ -34,10 +34,6 @@ interface loaderType {
 
 
 
-
-
-
-
 const uploadImages = async (file: File) => {
     const createFileName = () => {
         const timestamp = Date.now();
