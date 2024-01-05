@@ -55,7 +55,7 @@ export const handleGenerateText = async (formData: any) => {
     }
   };
 
-  export const fetchBase64Image = async (imageUrl) => {
+  export const fetchBase64Image = async (imageUrl: string) => {
     try {
       const response = await fetch('/api/openai/download-image', {
         method: 'POST',
