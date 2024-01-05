@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const PostSchema = new mongoose.Schema({
     title: String,
     content: String,
-    image: String, // URL to the image
+    image: String, 
     
     // Add any additional fields as required
 });

@@ -7,6 +7,7 @@ import Joi from "joi";
 const AddPostSchema = Joi.object({
   title: Joi.string().required(),
   content: Joi.string().required(),
+  image: Joi.string().required(),
   // Add other post fields here as required
 });
 
@@ -20,9 +21,9 @@ export async function POST(req: Request) {
     
     const data = await req.json();
 
-    const { title, content } = data; // Destructure your post fields
+    const { title, content, image } = data; // Destructure your post fields
 
-    const { error } = AddPostSchema.validate({ title, content }); 
+    const { error } = AddPostSchema.validate({ title, content, image }); 
 
     if (error) return NextResponse.json({ success: false, message: error.details[0].message.replace(/['"]+/g, '') });
 
