@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 export const add_new_product = async (formData: any) => {
     try {
-        const res = await fetch(`/api/Admin/product/add-product`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Admin/product/add-product`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export const add_new_product = async (formData: any) => {
 
   export const get_all_products = async () => {
     try {
-      const res = await fetch('/api/common/product/getProduct', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/common/product/getProduct`, {
         method: 'GET',
       });
       const data = await res.json();
@@ -35,7 +35,7 @@ export const add_new_product = async (formData: any) => {
 
   export const delete_a_product = async (id:string) => {
     try {
-      const res = await fetch(`/api/Admin/product/delete-product?id=${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Admin/product/delete-product?id=${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${Cookies.get('token')}`
@@ -52,7 +52,7 @@ export const add_new_product = async (formData: any) => {
 
   export const update_a_product = async (formData : any) => {
     try {
-      const res = await fetch(`/api/Admin/product/update-product`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Admin/product/update-product`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${Cookies.get('token')}`,
@@ -70,7 +70,7 @@ export const add_new_product = async (formData: any) => {
 
   export const get_product_by_id = async (id:string) => {
     try {
-      const res = await fetch(`/api/common/product/get-product-by-id?id=${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/common/product/get-product-by-id?id=${id}`, {
         method: 'GET',
       })
   
@@ -85,7 +85,7 @@ export const add_new_product = async (formData: any) => {
   
   export const get_product_by_category_id = async (id:string) => {
     try {
-      const res = await fetch(`/api/common/product/get-product-by-category-id?id=${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/common/product/get-product-by-category-id?id=${id}`, {
         method: 'GET',
       })
   

@@ -1,4 +1,3 @@
-
 export const register_me = async (formData : any) => {
     
     try {
