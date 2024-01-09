@@ -65,7 +65,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <Hero setRatio={setRatio} /> */}
       <div style={{ marginTop: '100px' }}> {/* Adjust the value as needed */}
         <Chillax />

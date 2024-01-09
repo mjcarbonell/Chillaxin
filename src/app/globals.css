@@ -27,3 +27,31 @@ body {
 }
 
 
+.post-card {
+  max-width: 500px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.post-title {
+  font-size: 1.5em;
+  color: #333;
+  padding: 10px 15px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-content {
+  padding: 15px;
+  color: #666;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+

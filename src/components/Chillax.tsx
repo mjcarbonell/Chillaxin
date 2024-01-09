@@ -1,5 +1,7 @@
+"use client"
 import React, { useState } from 'react';
-import { add_new_post } from '@/Services/Admin/post';
+import { add_new_post, get_all_posts } from '@/Services/Admin/post';
+import { useEffect } from 'react'
 import { handleGenerateImage, handleGenerateText, fetchBase64Image } from '@/Services/Admin/openai';
 
 const Chillax = () => {
@@ -8,6 +10,23 @@ const Chillax = () => {
   const [inputMessageRenaissance, setInputMessageRenaissance] = useState('');
   const [output, setOutput] = useState('');
   const [image, setImage] = useState('');
+  const [posts, setPosts] = useState([]); // State to store posts
+
+  useEffect(() => {
+    FetchDataOfPosts()
+  }, [])
+
+  const FetchDataOfPosts = async () => {
+    const allPosts = await get_all_posts();
+    console.log("ALL POSTS"); 
+    if(allPosts){
+      setPosts(allPosts.data);
+    }
+    console.log(allPosts);
+    // console.log(allPosts.data[0].image);
+
+  }
+  
 
   const handlePostSubmit = async () => {
     const inputMessageTitle = "create a renaissance art title based off of " + inputMessage; 
@@ -15,10 +34,10 @@ const Chillax = () => {
     const artImage = await handleGenerateImage(artTitle.output.content);
     
     const artBlob = await fetchBase64Image(artImage.output.data[0]['url']);
-    console.log(typeof artBlob);
-    console.log(typeof artBlob.base64Image);
-    console.log("ARTBLOB");
-    console.log(artBlob);
+    // console.log(typeof artBlob);
+    // console.log(typeof artBlob.base64Image);
+    // console.log("ARTBLOB");
+    // console.log(artBlob);
     const postData = {
       title: artTitle.output.content, 
       content: inputMessage, 
@@ -47,7 +66,17 @@ const Chillax = () => {
           onChange={(e) => setInputMessage(e.target.value)}
         />
       </div>
-
+      {posts.length > 0 && posts.map((post, index) => (
+      <div key={index} className="post-card">
+        <h2 className="post-title">{post.title}</h2>
+        <p className="post-content">{post.content}</p>
+        <img 
+          src={`data:image/jpeg;base64,${post.image}`} 
+          alt={post.title} 
+          className="post-image"
+        />
+      </div>
+      ))}
       
     </>
   );

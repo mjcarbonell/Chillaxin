@@ -19,7 +19,7 @@ export const handleGenerateText = async (formData: any) => {
       }
 
       const data = await response.json();
-      console.log('data in add new post (service) => ', data);
+      console.log('data in handle generate text => ', data);
 
       return data;
       
