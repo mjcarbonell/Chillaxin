@@ -4,13 +4,19 @@ import { add_new_post, get_all_posts } from '@/Services/Admin/post';
 import { useEffect } from 'react'
 import { handleGenerateImage, handleGenerateText, fetchBase64Image } from '@/Services/Admin/openai';
 
+interface Post {
+  title: string;
+  content: string;
+  image: string; 
+}
+
 const Chillax = () => {
   const [postText, setPostText] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [inputMessageRenaissance, setInputMessageRenaissance] = useState('');
   const [output, setOutput] = useState('');
   const [image, setImage] = useState('');
-  const [posts, setPosts] = useState([]); // State to store posts
+  const [posts, setPosts] = useState<Post[]>([]); // State to store posts
 
   useEffect(() => {
     FetchDataOfPosts()
