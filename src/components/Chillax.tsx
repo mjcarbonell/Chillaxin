@@ -33,11 +33,11 @@ const Chillax = () => {
       {/* Your existing code */}
       <div>
         {/* Your page content goes here */}
-        <input
+        {/* <input
           type="text"
           value={postText}
           onChange={(e) => setPostText(e.target.value)}
-        />
+        /> */}
         <button onClick={handlePostSubmit}>Submit Post</button>
       </div>
 
