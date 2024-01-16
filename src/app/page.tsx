@@ -32,34 +32,34 @@ export default function Home() {
   }, [])
 
 
-  useEffect(() => {
-    FetchDataOFProductAndCategory()
-  }, [])
+  // useEffect(() => {
+  //   FetchDataOFProductAndCategory()
+  // }, [])
 
 
-  const FetchDataOFProductAndCategory = async () => {
+  // const FetchDataOFProductAndCategory = async () => {
 
-    const categoryData = await get_all_categories();
-    if (categoryData?.success !== true) toast.error(categoryData?.message)
+  //   const categoryData = await get_all_categories();
+  //   if (categoryData?.success !== true) toast.error(categoryData?.message)
 
-    dispatch(setCategoryData(categoryData?.data))
-
-
-
-    const productData = await get_all_products();
-    if (productData?.success !== true) toast.error(productData?.message)
+  //   dispatch(setCategoryData(categoryData?.data))
 
 
-    dispatch(setProductData(productData?.data))
+
+  //   const productData = await get_all_products();
+  //   if (productData?.success !== true) toast.error(productData?.message)
 
 
-    setLoading(false)
-  }
+  //   dispatch(setProductData(productData?.data))
 
-  useEffect(() => {
-    dispatch(setCatLoading(loading))
-    dispatch(setProdLoading(loading))
-  }, [categoryLoading, productLoading, dispatch, loading])
+
+  //   setLoading(false)
+  // }
+
+  // useEffect(() => {
+  //   dispatch(setCatLoading(loading))
+  //   dispatch(setProdLoading(loading))
+  // }, [categoryLoading, productLoading, dispatch, loading])
 
 
 

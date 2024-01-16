@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(req: Request) {
   await connectDB();
   try {
-    const getData = await Post.find({});
+    const getData = await Post.find({}).select('title');
     if (getData) {
     return NextResponse.json({ success: true, data: getData });
     } else {
