@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { add_new_post,   } from '@/Services/Admin/post';
+import { add_new_post, get_all_posts   } from '@/Services/Admin/post';
 import { useEffect } from 'react'
 import { handleGenerateImage, handleGenerateText, fetchBase64Image } from '@/Services/Admin/openai';
 import Image from 'next/image';
