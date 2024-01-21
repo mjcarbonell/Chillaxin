@@ -74,4 +74,3 @@ export const handleGenerateText = async (formData: any) => {
       console.error('Error:', error);
     }
   };
-    

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { add_new_post, get_all_posts   } from '@/Services/Admin/post';
 import { useEffect } from 'react'
-import { handleGenerateImage, handleGenerateText, fetchBase64Image } from '@/Services/Admin/openai';
+import { handleGenerateImage, handleGenerateText, fetchBase64Image} from '@/Services/Admin/openai';
 import Image from 'next/image';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ interface Post {
   content: string;
   image: string; 
 }
+
 
 const Chillax = () => {
   const [postText, setPostText] = useState('');
@@ -44,6 +45,7 @@ const Chillax = () => {
     const artImage = await handleGenerateImage(artTitle.output.content);
     
     const artBlob = await fetchBase64Image(artImage.output.data[0]['url']);
+    // uploadToS3(artBlob.base64Image, artTitle.output.content);
     
 
     // console.log(typeof artBlob);
@@ -85,13 +87,16 @@ const Chillax = () => {
           <h2 className="post-title">{post.title}</h2>
           <p className="post-content">{post.content}</p>
           <div className="image-container">
+
             {<Image 
               src={`data:image/jpeg;base64,${post.image}`} 
               alt={post.title}
               width={500} // Set the desired width
               height={300} // Set the desired height
               className="post-image"    
-            /> }
+            /> } 
+
+
           </div>
         </div>
       ))}
