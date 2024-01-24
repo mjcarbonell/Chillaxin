@@ -6,6 +6,7 @@ import Hero from '@/components/Hero'
 import FeaturedProduct from '@/components/FeaturedProduct'
 import TopCategories from '@/components/TopCategories'
 import Chillax from '@/components/Chillax'
+import UploadForm from '@/components/S3UploadForm'
 import { get_all_categories } from '@/Services/Admin/category'
 import { get_all_products } from '@/Services/Admin/product'
 import useSWR from 'swr'
@@ -16,6 +17,7 @@ import { useEffect } from 'react'
 import Loading from './loading'
 import { setUserData } from '@/utils/UserDataSlice'
 import { RootState } from '@/Store/store'
+import { S3 } from '@aws-sdk/client-s3'
 
 
 export default function Home() {

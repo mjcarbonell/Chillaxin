@@ -33,3 +33,24 @@ export const add_new_post = async (formData: any) => {
       console.log('Error in getting all orders (service) =>', error)
     }
   }
+
+  export const upload_to_s3 = async (file) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const res = await fetch(`/api/s3upload`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            },
+            body: formData,
+        });
+
+        const data = await res.json();
+        console.log('file uploaded to s3', data);
+        return data;
+    } catch (error) {
+        console.log('Error in uploading file to s3 =>', error);
+    }
+  };

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { add_new_post, get_all_posts   } from '@/Services/Admin/post';
+import { add_new_post, get_all_posts } from '@/Services/Admin/post';
 import { useEffect } from 'react'
 import { handleGenerateImage, handleGenerateText, fetchBase64Image} from '@/Services/Admin/openai';
 import Image from 'next/image';
@@ -37,7 +37,22 @@ const Chillax = () => {
     // console.log(allPosts.data[0].image);
 
   }
-  
+  const uploadToS3 = async (blob: any) => {
+    const formData = new FormData();
+    formData.append("file", blob);
+    console.log("UPLOADING TO S3"); 
+    try {
+      const response = await fetch("/api/s3upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log(data.status);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handlePostSubmit = async () => {
     const inputMessageTitle = "create a renaissance art title based off of " + inputMessage; 
@@ -45,9 +60,8 @@ const Chillax = () => {
     const artImage = await handleGenerateImage(artTitle.output.content);
     
     const artBlob = await fetchBase64Image(artImage.output.data[0]['url']);
-    // uploadToS3(artBlob.base64Image, artTitle.output.content);
-    
-
+    console.log("before Upload to S3"); 
+    uploadToS3(artBlob);
     // console.log(typeof artBlob);
     // console.log(typeof artBlob.base64Image);
     // console.log("ARTBLOB");
@@ -67,12 +81,6 @@ const Chillax = () => {
     <>
       {/* Your existing code */}
       <div>
-        {/* Your page content goes here */}
-        {/* <input
-          type="text"
-          value={postText}
-          onChange={(e) => setPostText(e.target.value)}
-        /> */}
         <button onClick={handlePostSubmit}>Submit Post</button>
       </div>
 
@@ -87,7 +95,6 @@ const Chillax = () => {
           <h2 className="post-title">{post.title}</h2>
           <p className="post-content">{post.content}</p>
           <div className="image-container">
-
             {<Image 
               src={`data:image/jpeg;base64,${post.image}`} 
               alt={post.title}

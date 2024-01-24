@@ -5,10 +5,10 @@ import { fromEnv } from "@aws-sdk/credential-provider-env";
 const s3Client = new S3Client({ 
     region: process.env.AWS_REGION, 
     credentials: fromEnv(), 
-
 });
 
 async function uploadFileToS3(file: any, fileName: any) {
+    console.log("IN uploading file to s3"); 
     const fileBuffer = file; 
     console.log(fileName); 
 
